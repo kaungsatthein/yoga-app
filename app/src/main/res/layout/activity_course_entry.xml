@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CourseEntryActivity">
+
+    <TextView
+        android:id="@+id/sampleText"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Course Entry Form" />
+
+    <Spinner
+        android:id="@+id/spinnerDayOfWeek"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/txtTimePicker"
+        android:padding="6dp"
+        android:background="@color/material_dynamic_primary90"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:text="Click here to pick the time of the course"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/txtDatePicker"
+        android:padding="6dp"
+        android:background="@color/material_dynamic_secondary90"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:text="Click here to pick the date of the course"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/editCapacity"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Capacity"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/editDuration"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Duration (minutes)"
+        android:inputType="number"/>
+
+    <EditText
+        android:id="@+id/editPrice"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Price (USD)"
+        android:inputType="number"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Type of Class:"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        />
+    <RadioGroup
+        android:id="@+id/rdoGroupType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        >
+        <RadioButton
+            android:id="@+id/rdoFlowYoga"
+            android:text="Flow Yoga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:id="@+id/rdoAerialYoga"
+            android:text="Aerial Yoga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RadioButton
+            android:id="@+id/rdoFamilyYoga"
+            android:text="Family Yoga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/editDescription"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:inputType="textMultiLine"
+        android:hint="Your description..."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnSaveCourse"
+        android:text="Submit Your Course"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
