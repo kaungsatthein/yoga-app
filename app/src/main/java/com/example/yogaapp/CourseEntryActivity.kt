@@ -2,8 +2,10 @@ package com.example.yogaapp
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -172,6 +174,17 @@ class CourseEntryActivity : AppCompatActivity() {
                     .append("Type of class: $typeOfClass\n")
                     .append("description: $description")
 
+                val yogaCourseObj = YogaCourse(
+                    0,
+                    selectedDate,
+                    selectedTime,
+                    capacity.toInt(),
+                    duration.toInt(),
+                    price.toInt(),
+                    typeOfClass,
+                    description
+                )
+
                 val alertDialog = AlertDialog.Builder(this)
 
                 alertDialog
@@ -179,9 +192,26 @@ class CourseEntryActivity : AppCompatActivity() {
                     .setMessage(stringBuilder.toString())
                     .setCancelable(false)
                     .setPositiveButton("Yes") { dialog, _ ->
-                        Toast.makeText(this, "Yes clicked!", Toast.LENGTH_LONG).show()
+                        val result = dbHelper.saveCourse(yogaCourseObj)
+                        if (result != (-1).toLong()) {
+                            Toast.makeText(this, "Save course.", Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(this, "You cannot save course.", Toast.LENGTH_LONG)
+                                .show()
+                        }
                         dialog.dismiss()
-                        dbHelper.saveCourse("Yoga Course")
+
+                        val courses = dbHelper.getAllCourses();
+                        courses.forEach { course ->
+                            Log.i(
+                                "yoga courses",
+                                "***" + course.dayOfWeek + "," + course.timeOfCourse
+                            )
+                        }
+
+                        intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     }
                     .setNegativeButton("No") { dialog, _ ->
                         Toast.makeText(this, "No clicked!", Toast.LENGTH_LONG).show()

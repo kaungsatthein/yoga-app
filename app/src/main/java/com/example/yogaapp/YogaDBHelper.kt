@@ -1,10 +1,10 @@
 package com.example.yogaapp
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import kotlin.math.log
 
 class YogaDBHelper(context: Context) : SQLiteOpenHelper(context, "yoga.db", null, 1) {
 
@@ -66,7 +66,61 @@ class YogaDBHelper(context: Context) : SQLiteOpenHelper(context, "yoga.db", null
         onCreate(db)
     }
 
-    fun saveCourse(msg: String) {
-        Log.i("Yoga DB", "***Save Course***: $msg")
+    fun saveCourse(yogaCourse: YogaCourse): Long {
+        Log.i("Yoga DB", "***Save Course***")
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(dayOfWeek, yogaCourse.dayOfWeek)
+        values.put(timeOfCourse, yogaCourse.timeOfCourse)
+        values.put(capacity, yogaCourse.capacity)
+        values.put(duration, yogaCourse.duration)
+        values.put(price, yogaCourse.price)
+        values.put(typeOfClass, yogaCourse.typeOfClass)
+        values.put(description, yogaCourse.description)
+
+        val result = db.insert(courseTableName, null, values)
+
+        db.close()
+
+        Log.i("result", "***Save result:***: $result")
+
+        return result
+    }
+
+    fun getAllCourses(): List<YogaCourse> {
+        val courses = mutableListOf<YogaCourse>()
+
+        val db = this.readableDatabase
+        val query = "SELECT * FROM $courseTableName"
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndexOrThrow(id))
+                val dayOfWeek = cursor.getString(cursor.getColumnIndexOrThrow(dayOfWeek))
+                val timeOfCourse = cursor.getString(cursor.getColumnIndexOrThrow(timeOfCourse))
+                val capacity = cursor.getString(cursor.getColumnIndexOrThrow(capacity))
+                val duration = cursor.getString(cursor.getColumnIndexOrThrow(duration))
+                val price = cursor.getString(cursor.getColumnIndexOrThrow(price))
+                val typeOfClass = cursor.getString(cursor.getColumnIndexOrThrow(typeOfClass))
+                val description = cursor.getString(cursor.getColumnIndexOrThrow(description))
+
+                val course = YogaCourse(
+                    id,
+                    dayOfWeek,
+                    timeOfCourse,
+                    capacity.toInt(),
+                    duration.toInt(),
+                    price.toInt(),
+                    typeOfClass,
+                    description
+                )
+                courses.add(course)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+        return courses
     }
 }
