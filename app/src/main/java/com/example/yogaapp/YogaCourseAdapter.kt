@@ -29,7 +29,7 @@ class YogaCourseAdapter(
         position: Int
     ) {
         val course = courses[position]
-        holder.binding.txtViewDayOfWeek.text = course.dayOfWeek
+        holder.binding.txtViewDayOfWeek.text = course.typeOfClass
 
         holder.binding.btnEditCourse.setOnClickListener {
             onEditClick(course)

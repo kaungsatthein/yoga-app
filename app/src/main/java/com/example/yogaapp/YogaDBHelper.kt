@@ -82,7 +82,7 @@ class YogaDBHelper(context: Context) : SQLiteOpenHelper(context, "yoga.db", null
 
         db.close()
 
-        Log.i("result", "***Save result:***: $result")
+        Log.i("result", "***Save course:***: $result")
 
         return result
     }
@@ -148,6 +148,27 @@ class YogaDBHelper(context: Context) : SQLiteOpenHelper(context, "yoga.db", null
         val result = db.delete(courseTableName, "id=?", arrayOf(courseId.toString()))
         db.close()
         Log.i("Delete", "***Delete result:***: $result")
+        return result
+    }
+
+    fun resetCourse(): Int {
+        val db = this.writableDatabase
+        val result = db.delete(courseTableName, null, null)
+        db.close()
+        return result
+    }
+
+    fun saveClass(yogaClass: YogaClass): Long {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(courseId, yogaClass.courseId)
+        values.put(dateOfClass, yogaClass.dateOfClass)
+        values.put(teacher, yogaClass.teacher)
+        values.put(comments, yogaClass.comments)
+
+        val result = db.insert(classTableName, null, values)
+        db.close()
+        Log.i("result", "***Save class:***: $result")
         return result
     }
 }

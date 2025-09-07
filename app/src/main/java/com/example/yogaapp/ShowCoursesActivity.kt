@@ -6,6 +6,8 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -21,7 +23,6 @@ import java.util.Calendar
 
 
 class ShowCoursesActivity : AppCompatActivity() {
-
     lateinit var binding: ActivityShowCoursesBinding
     lateinit var dbHelper: YogaDBHelper
 
@@ -149,7 +150,6 @@ class ShowCoursesActivity : AppCompatActivity() {
         }
     }
 
-
     private fun ShowCoursesActivity.deleteAction(courseId: Int) {
         val alertDialog = AlertDialog.Builder(this)
         alertDialog.setTitle("Delete Course")
@@ -172,7 +172,40 @@ class ShowCoursesActivity : AppCompatActivity() {
             .create().show()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.course_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val result = when (item.itemId) {
+            R.id.itemResetCourses -> {
+                val alertDialog = AlertDialog.Builder(this)
+                alertDialog.setTitle("Delete Course")
+                    .setMessage("Are you sure want to reset all courses?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes") { dialog, _ ->
+                        val result = dbHelper.resetCourse()
+                        if (result == 0) {
+                            Toast.makeText(this, "Deletion Error", Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(this, "All course are deleted", Toast.LENGTH_LONG).show()
+                        }
+                        intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    .setNegativeButton("No") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .create().show()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+        return result
+    }
 }
 
 

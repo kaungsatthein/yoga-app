@@ -7,28 +7,47 @@
 
     <TextView
         android:id="@+id/txtViewDayOfWeek"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="end">
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnDetailCourse"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Detail Course"
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/btnAddClass"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Add to class"
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/btnEditCourse"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="Edit Course" />
+            android:layout_weight="1"
+            android:text="Edit Course"
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/btnDeleteCourse"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="Delete Course" />
+            android:layout_weight="1"
+            android:text="Delete Course"
+            android:textSize="10sp" />
 
     </LinearLayout>
 </LinearLayout>
