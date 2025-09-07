@@ -2,6 +2,7 @@ package com.example.yogaapp
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import java.time.DayOfWeek
 
 @Parcelize
 data class YogaCourse(
